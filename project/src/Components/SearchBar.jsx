@@ -1,25 +1,27 @@
 import React, {useState} from 'react';
 
-const SearchBar = () => {
+const SearchBar = ({search}) => {
 
-  const [query, setQuery] = useState('');
+  //stores username from the from
+  const [username, setUserName] = useState('');
 
   const handleClick = e => {
     e.preventDefault();
-    console.log('searching for: ', query);
+    console.log('searching for: ', username);
+    search(username)
   }
 
   return (
-    <React.Fragment>
+    <form onSubmit={handleClick}>
       <input
         type="text" placeholder="username"
-        onChange={(e)=> setQuery(e.target.value)}
-        >
-        </input>
-      <button onClick={handleClick}>
+        onChange={(e)=> setUserName(e.target.value)}
+        value={username}
+        />
+      <button type="submit">
         Search
       </button>
-    </React.Fragment>
+    </form>
     )
 }
 
