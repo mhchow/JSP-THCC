@@ -7,14 +7,13 @@ import axios from 'axios';
 function App() {
 
   const [gists, setGists] = useState([]);
-  //const [query, setQuery] = useState(null);
 
   useEffect(() => {
-    //getAllGists(query);
 
   });
 
   const getAllGists = (query) => {
+    console.log('change back to query');
     axios({
       method: 'get',
       url: `https://api.github.com/users/${query}/gists`,
@@ -24,6 +23,7 @@ function App() {
       const data = res.data;
       setGists(data);
     })
+    .catch(err => console.log(err))
   }
 
 
@@ -31,7 +31,8 @@ function App() {
   return (
     <div id="main">
       <SearchBar search={ username => getAllGists(username)}/>
-      <DisplayGists gists={gists}/>
+      {gists.length === 0 ? null : <DisplayGists gists={gists}/>}
+
     </div>
 
   )

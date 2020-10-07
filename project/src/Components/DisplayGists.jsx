@@ -1,11 +1,20 @@
 import React from 'react';
 
-const DisplayGists = () => {
+const DisplayGists = ({gists}) => {
+  console.log('gists', gists);
   return (
-    <ul>
-      <li>Gist 1</li>
-      <li>Gist 2</li>
-    </ul>
+    <div id="gists-container">
+      {gists.map(gist => {
+        return (
+          <div className="card" key={gist.id}>
+            <li>FileName: {gist.files.test.filename}</li>
+            <li>Description: {gist.description}</li>
+            <li>Created At: {gist.created_at}</li>
+          </div>
+          )
+      })
+      }
+    </div>
   )
 }
 
